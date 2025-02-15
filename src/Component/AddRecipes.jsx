@@ -2,8 +2,8 @@
 const AddRecipes = () => {
     return (
         <>
-        
-           <h1 className="add">Add Recipes</h1> 
+                   
+           <h1 className="headings">Add Recipes</h1> 
             <section className="addRecipes-Section">
                 <form action="/submit-recipe" method="post">
                     <fieldset>
@@ -33,29 +33,10 @@ const AddRecipes = () => {
                         <label htmlFor="measurements">Measurements:</label>
                         <br />
                         <textarea id="measurements" name="measurements" required></textarea>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Additional Information</legend>
-                        <br />
-                        <label htmlFor="cuisine-type">Cuisine Type:</label>
-                        <br />
-                        <input type="text" id="cuisine-type" name="cuisine-type" required />
                         <br />
                         <label htmlFor="dietary-restrictions">Dietary Restrictions:</label>
                         <br />
                         <input type="text" id="dietary-restrictions" name="dietary-restrictions" />
-                        <br />
-                        <label htmlFor="difficulty-level">Difficulty Level:</label>
-                        <br />
-                        <select id="difficulty-level" name="difficulty-level" >
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
-                        <br/>
-                        <label htmlFor="tags">Tags:</label>
-                        <br />
-                        <input type="text" id="tags" name="tags" required /> 
                     </fieldset>
                     <fieldset>
                         <legend>User Information</legend>
@@ -69,7 +50,7 @@ const AddRecipes = () => {
                         <input type="email" id="contact-information" name="contact-information" required />
                     </fieldset>
                 </form>
-                    <button type="submit" className="Submit-btn">Submit Recipe</button>
+                <button type="submit" className="Submit-btn">Submit Recipe</button>
            </section>
         </>
     );

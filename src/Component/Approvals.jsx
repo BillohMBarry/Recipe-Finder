@@ -1,11 +1,10 @@
 import React from 'react';
 
-
 const Approvals = () => {
     return (
         <>
-        
-            <h1>Approvals</h1>
+            
+            <h1 className='headings'>Approvals</h1>
         </>
     );
 }

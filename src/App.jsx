@@ -1,28 +1,26 @@
 import './App.css'
-import Home from './pages/Home'
-import Recipes from './pages/Recipes'
-import RecipeDetails from './pages/RecipeDetails'
-import Approvals from './pages/Approvals'
-import AddRecipes from './pages/AddRecipes'
-import NavLinks from './pages/NavLinks'
-import { Routes, Route } from 'react-router-dom'
-
-
-
+import Recipes from './Component/Recipes'
+import RecipeDetails from './Component/RecipeDetails'
+import AddRecipes from './Component/AddRecipes'
+import Approvals from './Component/Approvals'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import MainLayout from './LayOut/MainLayout'
+import HomePage from './Pages/HomePage'
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<MainLayout />}>
+    
+      <Route path='/' element={<HomePage />} />
+      <Route path='/recipes-page' element={<Recipes />} />
+      <Route path='/details/:id' element={<RecipeDetails />} />
+      <Route path='/approvals-page' element={<Approvals />} />
+      <Route path='/addRecipes-page' element={<AddRecipes />} />
+    </Route>
+  )
+)
 function App() {
 
-  return (
-    <>
-        <NavLinks />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/recipes-page' element={<Recipes />}/>
-          <Route path='/details/:id' element={<RecipeDetails />} />
-          <Route path='/approvals-page' element={<Approvals />}/>
-          <Route path='/addRecipes-page' element={<AddRecipes />}/>
-        </Routes>
-    </>
-  )
+  return <RouterProvider router={router}  />
 }
 
 export default App
