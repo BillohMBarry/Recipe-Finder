@@ -1,43 +1,29 @@
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import favoritePlain from "../assets/favoriteplain.png"
 import heartsfill from "../assets/heartsfill.png"
+import data from "../data";
 
 
-const Recipes = ({isHome = false}) => {
-    const [recipesItem, setRecipesItem] = useState([])
-    const [ErrorHandling, setErrorHandling] = useState(null)
-    const [Loading, setLoading ] = useState(true)
+const Recipes = () => {
+    const [recipesItem, setRecipesItem] = useState(data)
    const [favourite, setFavourite] = useState({})
-    useEffect(() => {
-        let apiUrl = isHome ? "/api/data?_limit=5" : "/api/data"
-       
-        const fetchRecipes = async () => {
-            try {
-                const respond = await fetch(apiUrl)
-                const respondData = await respond.json()
-                setRecipesItem(respondData)
-            } catch (error) {
-                setErrorHandling("error fetching data", error)
-            }finally {
-                setLoading(!Loading)
-            }
-        }
-        setTimeout(() => {
-            fetchRecipes()
-        },2000)
-    },[])
+   const [searchRecipe, setSearchRecipe] = useState(data)
+
+    // search functionality
     const searchName = (event) => {
-       const search = event.target.value
-       const searchNames = recipesItem.filter(byNames => byNames.name.toLowerCase().includes(search))
+       const search = event.target.value.toLowerCase()
+       const searchNames = searchRecipe.filter(byNames => byNames.name.toLowerCase().includes(search))
        setRecipesItem(searchNames)
+       
     }
-    const Icons = () => {
-       setFavourite(preFav => ({
+    // like and dislike functionality
+    const Icons = (RecipeID) => {
+      setFavourite(preFav => ({
         ...preFav,
-        [recipesItem.id]: !favourite[recipesItem.id]
-       }))
+        [RecipeID]: !preFav[RecipeID]
+      }))
+       console.log(favourite)
     }
     return (
         <> 
@@ -50,19 +36,19 @@ const Recipes = ({isHome = false}) => {
                         <input type="text" placeholder='eg cassava-leaf' id="searchInput" onChange={searchName}  />
                     </div>
                 </div>
-            <div className="recipe-container">
-                {ErrorHandling && <h3>{ErrorHandling}</h3>}
-                {Loading && <h3>Loading...</h3>}
+            <div className="recipe-container">  
+                 { /*  rendring the recipes */ }
                 {recipesItem && recipesItem.map(recipe => (
                     <div className="recipes" key={recipe.id}>
+                        
                         <img src={recipe.imageUrl} alt={recipe.alt}/>
                         <div className="others">
                             <Link to={`/details/${recipe.id}`}>
                                 <h3>{recipe.name}</h3>
                             </Link>
+                            <p style={{textAlign: "justify"}}>{recipe.description}</p>
                         </div>
-                        <button style={{border: "none", background: "transparent"}} onClick={() => setFavourite(preFav => ({...preFav, 
-                        [recipe.id]: !preFav[recipe.id]}))}>
+                        <button style={{border: "none", background: "transparent"}} onClick={() => Icons(recipe.id)}>
                             <img src={favourite[recipe.id] ? heartsfill : favoritePlain} alt=""  className="Icons-img"/>
                         </button>
                     </div>
@@ -73,5 +59,6 @@ const Recipes = ({isHome = false}) => {
         </>
     );
 }
-
+//     () => setFavourite(preFav => ({...preFav, 
+// [recipe.id]: !preFav[recipe.id]}))
 export default Recipes;

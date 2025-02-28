@@ -9,19 +9,19 @@ const RecipeDetails = () => {
     const [Voting, setVoting] = useState(0)
     const [Details, setDeatils] = useState(null)
     const {id} = useParams()
-   useEffect(() => {
-       const getDetails = async () => {
-        try {
-            const respond = await fetch(`/api/data/${id}`)
-            const data = await respond.json()
-            setDeatils(data)
-            console.log(data)
-        } catch (error) {
-          console.log(error)  
-        }
-       }
-       getDetails()
-   },[])
+//    useEffect(() => {
+//        const getDetails = async () => {
+//         try {
+//             const respond = await fetch(`/api/data/${id}`)
+//             const data = await respond.json()
+//             setDeatils(data)
+//             console.log(data)
+//         } catch (error) {
+//           console.log(error)  
+//         }
+//        }
+//        getDetails()
+//    },[])
 
     return (
         
