@@ -1,11 +1,11 @@
 import Recipes from '../Component/Recipes'
-function HomePage({  setRecipesItem}) {
-   
+
+function HomePage({ setRecipesItem, }) {
+  
   return (
-    <div>
-      
-        <Recipes  setRecipesItem={  setRecipesItem}/>
-    </div>
+    <main>
+     <Recipes  setRecipesItem={  setRecipesItem}  />
+    </main>
   )
 }
 
